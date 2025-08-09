@@ -1,0 +1,16 @@
+:root {
+  font-family: "Inter", monospace, sans-serif;
+  color: black;
+}
+ 
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  background: linear-gradient(to bottom,#ffffff 0%, #7cb9ef 100%);
+  margin: 80px 20px;
+  box-sizing: border-box;
+  height: 100vh;
+}
