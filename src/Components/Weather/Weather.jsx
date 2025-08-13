@@ -4,40 +4,51 @@ import { GrLocation } from 'react-icons/gr'
 import { BsCloudy } from 'react-icons/bs' 
 import { WiHumidity } from 'react-icons/wi'
 
-const Weather = () => {
-  return (
-    <>
-      <div className="weather">
-        <div className="weather-location">
-          <GrLocation size={32}/>
-          <h1>Cape Town</h1>
-        </div>
+const Weather = ({ data }) => {
 
-        <div className="weather-section">
-          <div className="weather-temp">
-            <h1>18°</h1>
-          </div>
-          
-          <div className="weather-icon">
-            <BsCloudy size={25}/>
-            <h3>Partly Cloudy</h3>
-          </div>
+  
 
-          <div className="weather-feels">
-            <p>Feels like 15°</p>
-            <div className="weather-hum">
-              <div className="hum-icon-title">
-                <WiHumidity size={20}/>
-                <h3>Humidity</h3>
+  if (!data || !data.main) 
+    return <p>Loading weather...</p>;
+  else{
+     const iconCode = data.weather[0].icon;
+     const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+  
+    return (
+        <>
+          <div className="weather">
+            <div className="weather-location">
+              <GrLocation size={32}/>
+              <h1>{data.name}</h1>
+            </div>
+
+            <div className="weather-section">
+              <div className="weather-temp">
+                <h1>{Math.round(data.main.temp)}°</h1>
               </div>
-              <p>71%</p>
+              
+              <div className="weather-icon">
+                {/* <BsCloudy size={25}/> */}
+                <img src={iconUrl} alt={data.weather[0].description} />
+                <h3>{data.weather[0].description}</h3>
+              </div>
+
+              <div className="weather-feels">
+                <p>Feels like {Math.round(data.main.feels_like)}°</p>
+                <div className="weather-hum">
+                  <div className="hum-icon-title">
+                    <WiHumidity size={20}/>
+                    <h3>Humidity</h3>
+                  </div>
+                  <p>{Math.round(data.main.humidity)}%</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      
-    </>
-  )
+          
+        </>
+      )
+    }
 }
 
 export default Weather
