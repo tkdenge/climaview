@@ -10,7 +10,25 @@
 
 body{
   background: linear-gradient(to bottom,#ffffff 0%, #7cb9ef 100%);
-  margin: 80px 20px;
+  margin: 80px 40px;
   box-sizing: border-box;
   height: 100vh;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+}
+
+
+@media (min-width:768px) {
+  body{
+    margin: 80px auto;
+    max-width: 400px;
+  }
+}
+
+@media (min-width:1024px) {
+  body{
+    margin: 80px auto;
+    max-width: 1000px;
+  }
 }

@@ -16,6 +16,7 @@ const Forecast = ({ data }) => {
   return (
     <>
       <div className="forecast">
+        <h3>5-Day forecast</h3>
         {dailyForecast.map((day, index) => (
           <div key={index} className="forecast-day">
             <p>

@@ -6,13 +6,13 @@ const Header = () => {
     <>
       <div className="header">
         <div className="header-title">
-          <p>ClimaView</p>
+          <h1>CloudLeaf</h1>
         </div>
 
-        <div className="header-bg-mode">
+        {/* <div className="header-bg-mode">
           <MdLightMode/>
           <MdDarkMode/>
-        </div>
+        </div> */}
       </div>
     </>
   )
