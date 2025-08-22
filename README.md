@@ -19,4 +19,4 @@ A simple, responsive weather application built with **React** that displays curr
 ## Screenshots
 
 
-![Current Weather](./src/cloudleaf.png)  
+![Current Weather](./public/cloudleaf.png)  
