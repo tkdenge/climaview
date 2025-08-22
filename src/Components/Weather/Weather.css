@@ -52,6 +52,10 @@
   justify-self: start;
 }
 
+.weather-icon img{
+  filter: drop-shadow(0 0 2px rgb(33, 33, 33, 0.4));
+}
+
 .weather-section h3{
   font-size: 1rem;
 }
@@ -89,6 +93,8 @@
   display: flex;
   align-items: center;
 }
+
+
 
 
 /* @media (min-width:1024px) {

@@ -3,32 +3,67 @@ import './Forecast.css'
 
 const Forecast = ({ data }) => {
 
-   if (!data || !data.list) 
-    return console.log('hello');
+   if (!data) return null;
 
-    console.log(data);
+  // Group forecast entries by date
+  // Filter to 12:00 PM entry for each day
+const dailyData = {};
 
-  // Filter to show 1 forecast per day (at 12:00 PM)
-  const dailyForecast = data.list.filter(item =>
-    item.dt_txt.includes("12:00:00")
-  );
+  data.list.forEach((item) => {
+  const date = item.dt_txt.split(" ")[0];
+
+  if (!dailyData[date]) {
+    dailyData[date] = {
+      temps: [],
+      iconEntry: null,
+    };
+  }
+
+  // Push both min and max of this 3-hour block
+  dailyData[date].temps.push(item.main.temp_min);
+  dailyData[date].temps.push(item.main.temp_max);
+
+  // Pick 12:00 PM entry for icon
+  if (item.dt_txt.includes("12:00:00")) {
+    dailyData[date].iconEntry = item.weather[0];
+  }
+});
+
+  // Prepare next 5 days
+  const nextFiveDays = Object.keys(dailyData)
+    .slice(0, 5)
+    .map((date) => ({
+      date,
+      min: Math.min(...dailyData[date].temps),
+      max: Math.max(...dailyData[date].temps),
+      weather: dailyData[date].iconEntry || { icon: '01d', description: 'N/A' },
+    }));
+
 
   return (
     <>
       <div className="forecast">
         <h3>5-Day forecast</h3>
-        {dailyForecast.map((day, index) => (
-          <div key={index} className="forecast-day">
-            <p>
-              {new Date(day.dt_txt).toLocaleDateString("en-US", {
-                weekday: "short"
-              })}
-            </p>
+        {nextFiveDays.map((day) => (
+          <div key={day.date} className="forecast-day">
+            <span>
+            {new Date(day.date).toLocaleDateString(undefined, {
+              weekday: "short",
+              month: "short",
+              day: "numeric",
+            })}
+            </span>
+
             <img
-              src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} width={40}
-              alt={day.weather[0].description}
+              src={`https://openweathermap.org/img/wn/${day.weather.icon}@2x.png`}
+              alt={day.weather.description}
+              width={40}
             />
-            <p>{Math.round(day.main.temp)}°</p>
+
+            {/* <p>{day.weather.description}</p> */}
+
+            <p>{Math.round(day.max)}° / {Math.round(day.min)}°</p>
+        
           </div>
         ))}
       </div>

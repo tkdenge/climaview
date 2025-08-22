@@ -19,3 +19,10 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.forecast-day img{
+  filter: drop-shadow(0 0 2px rgb(33, 33, 33, 0.4));
+}
+
+.forecast-temp{
+  display: flex;
+}
