@@ -1,4 +1,4 @@
-# Weather App
+# CloudLeaf
 
 A simple, responsive weather application built with **React** that displays current weather and a 5-day forecast. Users can search for a city or use their current location to get weather information.
 
